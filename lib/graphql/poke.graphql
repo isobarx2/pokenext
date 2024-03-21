@@ -2,14 +2,14 @@ fragment pokemonSimpleFields on pokemon_v2_pokemon {
   id
   name
   types: pokemon_v2_pokemontypes {
-    pokemon_v2_type {
+    type: pokemon_v2_type {
       name
     }
   }
 }
 
 query getAll {
-  pokemons: pokemon_v2_pokemon(limit: 200) {
+  pokemons: pokemon_v2_pokemon(limit: 50) {
     ...pokemonSimpleFields
   }
 }
@@ -17,5 +17,7 @@ query getAll {
 query getByName($slug: String!) {
   pokemon: pokemon_v2_pokemon(where: { name: { _eq: $slug } }) {
     ...pokemonSimpleFields
+    height
+    weight
   }
 }

@@ -17,15 +17,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-gray-50 ${signika.className}`}>
-        <header className="bg-black text-2xl text-white text-center py-4">
-          <Link href="/">
+        <main className="min-h-screen flex flex-col">
+          <header className="bg-black text-2xl text-white text-center py-4">
+            <Link href="/">
+              <b>Poké</b>Next
+            </Link>
+          </header>
+          <div className="grow">{children}</div>
+          <footer className="container mx-auto border-t text-black border-black py-4 mt-4 text-center">
             <b>Poké</b>Next
-          </Link>
-        </header>
-        {children}
-        <footer className="container mx-auto border-t text-black border-black py-4 mt-4 text-center">
-          <b>Poké</b>Next
-        </footer>
+          </footer>
+        </main>
       </body>
     </html>
   );

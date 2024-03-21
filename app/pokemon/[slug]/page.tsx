@@ -1,6 +1,11 @@
+import PokeFavourite from "@/components/pokeFavourite";
 import PokeImage from "@/components/pokeImage";
 import { createClient } from "@/lib/client";
-import { HomeIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronUpDownIcon,
+  HomeIcon,
+  ScaleIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -20,28 +25,37 @@ export default async function Page({ params }: Props) {
 
   if (!pokemon) return notFound();
   return (
-    <main className="flex flex-col items-center justify-between ">
-      <div className="w-full bg-gray-100 flex mx-auto p-6 mx:p-8 lg:p-12 flex-col text-center">
-        <div className="flex items-center justify-center">
-          <PokeImage id={pokemon.id} alt={pokemon.name} />
-          <span className="font-bold text-6xl text-gray-300">
-            #{pokemon.id}
-          </span>
-          <PokeImage id={pokemon.id} alt={pokemon.name} back />
-        </div>
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex items-center justify-center">
+        <PokeImage id={pokemon.id} alt={pokemon.name} />
+        <PokeFavourite id={pokemon.id} />
+        <PokeImage id={pokemon.id} alt={pokemon.name} back />
       </div>
-      <h1 className="text-5xl mt-4 mb-1">{pokemon.name} </h1>
-      <div className="flex mb-6">
-        {pokemon.types.map((type, index) => {
+
+      <h1 className="text-5xl mt-4 mb-1">{pokemon.name}</h1>
+
+      <div className="flex my-2 justify-center">
+        {pokemon.types.map((item, index) => {
           return (
-            <p
-              className="text-xs mr-1 text-white bg-gray-400 rounded-md px-2 py-0"
+            <span
+              className="inline-block text-xs mr-1 text-white bg-gray-400 rounded-md px-2 py-0"
               key={index}
             >
-              {type.pokemon_v2_type?.name}
-            </p>
+              {item.type?.name}
+            </span>
           );
         })}
+      </div>
+
+      <div className="flex">
+        <div className="m-4 flex justify-center items-center">
+          <ChevronUpDownIcon className="text-gray-500 w-6 h-6 inline-block mr-2" />
+          <span className="text-3xl">{pokemon.height}</span>
+        </div>
+        <div className="m-4 flex justify-center items-center">
+          <ScaleIcon className="text-gray-500 w-6 h-6 inline-block mr-2" />
+          <span className="text-3xl">{pokemon.weight}</span>
+        </div>
       </div>
       <Link
         href="/"
@@ -49,6 +63,6 @@ export default async function Page({ params }: Props) {
       >
         <HomeIcon className="w-4 h-4 mr-2" /> Go to homepage
       </Link>
-    </main>
+    </div>
   );
 }
