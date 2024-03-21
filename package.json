@@ -3,25 +3,54 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "codegen": "graphql-codegen --require dotenv/config",
+    "codegen:watch": "npm run codegen -- --watch",
+    "dev": "concurrently \"npm run codegen:watch\" \"next dev\"",
+    "postinstall": "npx sort-package-json",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.1",
+    "@parcel/watcher": "^2.4.1",
+    "next": "14.1.4",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.1.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/schema-ast": "^4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-graphql-request": "^6.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-eslint/eslint-plugin": "^3.20.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
+    "concurrently": "^8.2.2",
     "eslint": "^8",
-    "eslint-config-next": "14.1.4"
+    "eslint-config-next": "14.1.4",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-regexp": "^1.12.0",
+    "eslint-plugin-sonarjs": "^0.18.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
+    "eslint-plugin-testing-library": "^5.9.1",
+    "eslint-plugin-unicorn": "^46.0.0",
+    "graphql": "^16.8.1",
+    "graphql-query-compress": "^1.2.4",
+    "postcss": "^8",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "sort-package-json": "^2.6.0",
+    "stylelint": "^14.16.1",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-standard": "^29.0.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
   }
 }

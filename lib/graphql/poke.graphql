@@ -1,0 +1,21 @@
+fragment pokemonSimpleFields on pokemon_v2_pokemon {
+  id
+  name
+  types: pokemon_v2_pokemontypes {
+    pokemon_v2_type {
+      name
+    }
+  }
+}
+
+query getAll {
+  pokemons: pokemon_v2_pokemon(limit: 200) {
+    ...pokemonSimpleFields
+  }
+}
+
+query getByName($slug: String!) {
+  pokemon: pokemon_v2_pokemon(where: { name: { _eq: $slug } }) {
+    ...pokemonSimpleFields
+  }
+}
